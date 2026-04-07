@@ -12,6 +12,7 @@ from ontology_audit_hub.domain.review.models import (
 from ontology_audit_hub.infra.github_snapshot import GitHubReviewCandidate, GitHubSnapshotFile
 from ontology_audit_hub.infra.llm.github_review_agents import (
     GitHubReviewIssue,
+    GitHubReviewReport,
     GitHubReviewScopePacket,
     GitHubReviewScopePlan,
     GitHubReviewStagePacket,
@@ -20,14 +21,16 @@ from ontology_audit_hub.infra.llm.github_review_agents import (
 
 class GitHubReviewState(TypedDict, total=False):
     request: GitHubReviewRequest
-    repo_target: GitHubRepoTarget | None
-    snapshot_workspace_dir: str | None
-    snapshot_dir: str | None
+    repo_target: GitHubRepoTarget
+    snapshot_workspace_dir: str
+    snapshot_dir: str
     candidate_files: list[GitHubReviewCandidate]
+    selected_files: list[GitHubSnapshotFile]
     focus_files: list[GitHubSnapshotFile]
-    scope_packet: GitHubReviewScopePacket | None
-    stage_packet: GitHubReviewStagePacket | None
-    scope_plan: GitHubReviewScopePlan | None
+    review_packet: GitHubReviewStagePacket
+    scope_packet: GitHubReviewScopePacket
+    stage_packet: GitHubReviewStagePacket
+    scope_plan: GitHubReviewScopePlan
     enabled_reviewers: list[str]
     correctness_issues: list[GitHubReviewIssue]
     risk_regression_issues: list[GitHubReviewIssue]
@@ -36,6 +39,6 @@ class GitHubReviewState(TypedDict, total=False):
     merged_issues: list[GitHubReviewIssue]
     warnings: list[str]
     current_phase: str
-    progress: GitHubReviewProgress | None
-    partial_report: GitHubReviewPartialReport | None
-    final_report: GitHubReviewResponse | None
+    progress: GitHubReviewProgress
+    partial_report: GitHubReviewPartialReport
+    final_report: GitHubReviewResponse | GitHubReviewReport

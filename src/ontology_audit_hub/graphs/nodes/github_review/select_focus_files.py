@@ -64,6 +64,7 @@ def make_select_focus_files_node(settings: AuditHubSettings):
         )
         return {
             "focus_files": focus_files,
+            "review_packet": stage_packet,
             "stage_packet": stage_packet,
             "enabled_reviewers": enabled_reviewers,
             "warnings": list(dict.fromkeys(merged_warnings)),

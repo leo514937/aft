@@ -28,9 +28,11 @@ def make_aggregate_issues_node(llm_adapter):
         )
         if report is None:
             report = build_local_report(
-                review_packet=review_packet,
+                stage_packet=review_packet,
                 issues=local_issues,
                 warnings=warnings,
+                enabled_reviewers=list(state.get("enabled_reviewers", [])),
+                candidate_count=len(state.get("candidate_files", [])),
             )
         elif not report.issues and local_issues:
             report = report.model_copy(update={"issues": local_issues})

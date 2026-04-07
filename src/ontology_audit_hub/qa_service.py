@@ -904,8 +904,8 @@ def _ensure_visible_citations(
         citation = hit.citation_id.strip()
         if citation and f"[{citation}]" not in text:
             missing_tokens.append(f"[{citation}]")
-    for hit in graph_hits:
-        citation = hit.citation_id.strip()
+    for graph_hit in graph_hits:
+        citation = graph_hit.citation_id.strip()
         if citation and f"[{citation}]" not in text:
             missing_tokens.append(f"[{citation}]")
 
@@ -933,11 +933,11 @@ def _build_template_answer(
             snippet = snippet[:177].rstrip() + "..."
         citation = f" [{hit.citation_id}]" if hit.citation_id else ""
         lines.append(f"{snippet}{citation}")
-    for hit in graph_hits[:3]:
-        summary = hit.evidence_text.strip() or ", ".join(hit.related_entities)
+    for graph_hit in graph_hits[:3]:
+        summary = graph_hit.evidence_text.strip() or ", ".join(graph_hit.related_entities)
         if not summary:
             continue
-        citation = f" [{hit.citation_id}]" if hit.citation_id else ""
+        citation = f" [{graph_hit.citation_id}]" if graph_hit.citation_id else ""
         lines.append(f"{summary}{citation}")
     for path in graph_paths[:1]:
         if path and path.strip():

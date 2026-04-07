@@ -25,6 +25,8 @@ from ontology_audit_hub.infra.settings import AuditHubSettings
 
 logger = logging.getLogger(__name__)
 
+_neo4j: Any | None
+
 try:  # pragma: no cover - optional dependency path
     import neo4j as _neo4j
 except ImportError:  # pragma: no cover - optional dependency path
@@ -213,12 +215,16 @@ class QdrantReferenceReader:
 
         final_hits: list[RetrievalHit] = []
         filtered_low_relevance_count = 0
-        ranked_candidates = {candidate.hit.chunk_id: candidate for candidate in fused_candidates if candidate.hit.chunk_id}
+        ranked_candidates = {
+            ranked_candidate.hit.chunk_id: ranked_candidate
+            for ranked_candidate in fused_candidates
+            if ranked_candidate.hit.chunk_id
+        }
         for index, (hit, mmr_score) in enumerate(selected, start=1):
-            candidate = ranked_candidates.get(hit.chunk_id)
-            channels = sorted(candidate.channels) if candidate is not None else ["dense"]
-            dense_rank = candidate.dense_rank if candidate is not None else None
-            sparse_rank = candidate.sparse_rank if candidate is not None else None
+            ranked_candidate = ranked_candidates.get(hit.chunk_id)
+            channels = sorted(ranked_candidate.channels) if ranked_candidate is not None else ["dense"]
+            dense_rank = ranked_candidate.dense_rank if ranked_candidate is not None else None
+            sparse_rank = ranked_candidate.sparse_rank if ranked_candidate is not None else None
             fusion_rank = index
             relevance_score = _compute_relevance_score(hit)
             if relevance_score < min_relevance_score:

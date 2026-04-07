@@ -9,20 +9,36 @@ from ontology_audit_hub.infra.llm.github_review_agents import GitHubReviewReport
 def make_finalize_response_node():
     def finalize_response_node(state: GitHubReviewState) -> GitHubReviewState:
         report = state.get("final_report")
-        if not isinstance(report, GitHubReviewReport):
-            report = build_local_report(
-                review_packet=state["review_packet"],
+        stage_packet = state["stage_packet"]
+        if isinstance(report, GitHubReviewResponse):
+            return {
+                **state,
+                "final_report": report,
+                "current_phase": "finalize_response",
+            }
+        if isinstance(report, GitHubReviewReport):
+            llm_report = report
+        else:
+            response = build_local_report(
+                stage_packet=stage_packet,
                 issues=list(state.get("merged_issues", [])),
                 warnings=list(state.get("warnings", [])),
+                enabled_reviewers=list(state.get("enabled_reviewers", [])),
+                candidate_count=len(state.get("candidate_files", [])),
             )
+            return {
+                **state,
+                "final_report": response,
+                "current_phase": "finalize_response",
+            }
 
-        reviewed_files = report.reviewed_files or [file.path for file in state["review_packet"].files]
+        reviewed_files = llm_report.reviewed_files or [file.path for file in stage_packet.files]
         response = GitHubReviewResponse(
-            summary=report.summary,
-            issues=[to_domain_issue(issue) for issue in report.issues],
+            summary=llm_report.summary,
+            issues=[to_domain_issue(issue) for issue in llm_report.issues],
             reviewed_files=reviewed_files,
-            warnings=list(dict.fromkeys(report.warnings or list(state.get("warnings", [])))),
-            next_steps=list(dict.fromkeys(report.next_steps)),
+            warnings=list(dict.fromkeys(llm_report.warnings or list(state.get("warnings", [])))),
+            next_steps=list(dict.fromkeys(llm_report.next_steps)),
         )
         return {
             **state,

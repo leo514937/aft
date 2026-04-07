@@ -5,7 +5,7 @@ import json
 import uuid
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from ontology_audit_hub.domain.audit.models import (
     AuditReport,
@@ -16,6 +16,7 @@ from ontology_audit_hub.domain.audit.models import (
     Severity,
 )
 from ontology_audit_hub.graphs.nodes.human_input import apply_resumed_human_response
+from ontology_audit_hub.graphs.state import GraphState
 from ontology_audit_hub.graphs.supervisor import build_supervisor_graph
 from ontology_audit_hub.infra.checkpointing import CheckpointStoreFactory, SqliteCheckpointStoreFactory
 from ontology_audit_hub.infra.graph_augmenter import Neo4jGraphAugmenter, Neo4jSettings, NullGraphAugmenter
@@ -163,9 +164,9 @@ class SupervisorService:
                 }
                 update_as_node: str | None = None
                 if str(pending.get("current_phase") or "") == "human_input":
-                    resumed_state = dict(snapshot.values)
-                    resumed_state.update(updated_values)
-                    updated_values = apply_resumed_human_response(resumed_state, decision)
+                    resumed_state = cast(GraphState, dict(snapshot.values))
+                    resumed_state.update(cast(GraphState, updated_values))
+                    updated_values = cast(dict[str, Any], apply_resumed_human_response(resumed_state, decision))
                     update_as_node = "human_input"
                 updated_config = graph.update_state(
                     snapshot.config,

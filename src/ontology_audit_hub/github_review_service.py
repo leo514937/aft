@@ -5,7 +5,7 @@ import shutil
 import tempfile
 from collections.abc import AsyncIterator, Callable
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal, cast
 
 from ontology_audit_hub.domain.review.models import (
     GitHubReviewErrorResponse,
@@ -213,7 +213,7 @@ class GitHubReviewService:
         ]
         reviewed_files = [file.path for file in state.get("focus_files", [])]
         return GitHubReviewPartialReport(
-            category=node_name,
+            category=cast("Literal['correctness', 'risk_regression', 'security', 'test_coverage']", node_name),
             issues=issues,
             reviewed_files=reviewed_files,
             warnings=list(state.get("warnings", [])),

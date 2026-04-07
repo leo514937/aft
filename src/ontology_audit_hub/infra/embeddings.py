@@ -4,6 +4,8 @@ import hashlib
 import math
 from typing import Any
 
+tiktoken: Any | None
+
 try:  # pragma: no cover - optional dependency path
     import tiktoken
 except ImportError:  # pragma: no cover - optional dependency path
