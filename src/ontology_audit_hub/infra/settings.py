@@ -120,6 +120,21 @@ class AuditHubSettings:
     github_review_max_stage_total_chars: int = 30000
     github_review_download_timeout_seconds: float = 20.0
 
+    # Agent System Prompts (Overrides)
+    prompt_github_scope_planner: str | None = None
+    prompt_github_correctness: str | None = None
+    prompt_github_risk_regression: str | None = None
+    prompt_github_security: str | None = None
+    prompt_github_test_coverage: str | None = None
+    prompt_github_judge_merge: str | None = None
+    prompt_qa_answer: str | None = None
+    prompt_qa_retrieval_decision: str | None = None
+    prompt_qa_classify_intent: str | None = None
+    prompt_qa_query_rewrite: str | None = None
+    prompt_doc_claim_extraction: str | None = None
+    prompt_human_card_enhancement: str | None = None
+    prompt_repair_suggestion: str | None = None
+
     @classmethod
     def from_env(cls) -> AuditHubSettings:
         # Auto-load .env file before reading env vars (no external deps needed)
