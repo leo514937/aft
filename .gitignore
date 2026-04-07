@@ -8,6 +8,3 @@ __pycache__/
 artifacts/
 artifacts/generated_tests/
 
-# Agent Logic and Proprietary Graphs
-src/ontology_audit_hub/graphs/
-src/ontology_audit_hub/infra/llm/github_review_agents.py
