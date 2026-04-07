@@ -111,8 +111,10 @@ def test_supervisor_service_doctor_reports_session_scoped_artifacts(tmp_path: Pa
     payload = service.doctor()
 
     assert payload["ready"] is True
-    assert payload["artifact_layout"]["generated_tests_dir"].endswith("example-session\\generated_tests")
-    assert payload["artifact_layout"]["error_snapshot"].endswith("example-session\\error.json")
+    generated_path = Path(payload["artifact_layout"]["generated_tests_dir"])
+    assert generated_path.parts[-2:] == ("example-session", "generated_tests")
+    error_path = Path(payload["artifact_layout"]["error_snapshot"])
+    assert error_path.parts[-2:] == ("example-session", "error.json")
 
 
 def test_supervisor_service_scopes_qdrant_collection_by_session(tmp_path: Path) -> None:

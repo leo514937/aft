@@ -15,8 +15,7 @@ def test_repo_root_imports_api_without_editable_install() -> None:
         [
             sys.executable,
             "-c",
-            "from uvicorn.importer import import_from_string; "
-            "app = import_from_string('ontology_audit_hub.api:app'); "
+            "from ontology_audit_hub.api import app; "
             "print(type(app).__name__); "
             "app.state.audit_service.close()",
         ],
