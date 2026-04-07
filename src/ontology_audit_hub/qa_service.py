@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from collections.abc import AsyncIterator
 import asyncio
 import inspect
 import logging
-from dataclasses import dataclass, field
 import threading
+from collections.abc import AsyncIterator
+from dataclasses import dataclass, field
 from typing import Any
 
 from ontology_audit_hub.domain.audit.models import (

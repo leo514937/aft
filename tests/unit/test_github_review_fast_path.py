@@ -5,14 +5,13 @@ from ontology_audit_hub.graphs.nodes.github_review._utils import (
     build_local_report,
     dedupe_issues,
     limit_review_issues,
-    sort_issues,
 )
 from ontology_audit_hub.infra.llm.github_review_agents import (
+    GitHubReviewFile,
+    GitHubReviewIssue,
     GitHubReviewScopePacket,
     GitHubReviewStagePacket,
     GitHubScopeCandidate,
-    GitHubReviewFile,
-    GitHubReviewIssue,
 )
 
 

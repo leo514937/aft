@@ -9,11 +9,11 @@ from fastapi.testclient import TestClient
 
 from ontology_audit_hub.api import create_app
 from ontology_audit_hub.domain.audit.models import QAGraphHit, RetrievalHit
-from ontology_audit_hub.infra.qa_sources import QueryRewriteTrace, RAGSearchResult
 from ontology_audit_hub.infra.checkpointing import SqliteCheckpointStoreFactory
 from ontology_audit_hub.infra.graph_augmenter import NullGraphAugmenter
 from ontology_audit_hub.infra.human_store import FileHumanInteractionStore
 from ontology_audit_hub.infra.llm.base import NullStructuredLLMAdapter
+from ontology_audit_hub.infra.qa_sources import QueryRewriteTrace, RAGSearchResult
 from ontology_audit_hub.infra.retrieval import NullRetriever
 from ontology_audit_hub.infra.runtime import GraphRuntime
 from ontology_audit_hub.infra.settings import AuditHubSettings

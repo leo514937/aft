@@ -51,7 +51,7 @@ class GitHubReviewRequest(BaseModel):
         return cleaned_paths
 
     @model_validator(mode="after")
-    def _validate_paths(self) -> "GitHubReviewRequest":
+    def _validate_paths(self) -> GitHubReviewRequest:
         if not self.paths:
             raise ValueError("至少要提供一个路径")
         return self

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import shutil
 import tempfile
 import urllib.error
@@ -8,7 +9,6 @@ import urllib.request
 import zipfile
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-import re
 
 from ontology_audit_hub.domain.review.models import GitHubRepoTarget
 

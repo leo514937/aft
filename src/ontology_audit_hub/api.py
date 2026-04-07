@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import asyncio
-from contextlib import asynccontextmanager
 import json
 import logging
+from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import FastAPI, File, Form, HTTPException, Response, UploadFile, status
@@ -17,10 +17,10 @@ from ontology_audit_hub.domain.audit.models import (
     QuestionAnswerCancelRequest,
     QuestionAnswerRequest,
 )
-from ontology_audit_hub.domain.review.models import GitHubReviewCancelRequest, GitHubReviewRequest
 from ontology_audit_hub.domain.documents.models import KnowledgeUploadConfig
-from ontology_audit_hub.infra.settings import AuditHubSettings
+from ontology_audit_hub.domain.review.models import GitHubReviewCancelRequest, GitHubReviewRequest
 from ontology_audit_hub.github_review_service import GitHubReviewError, GitHubReviewService
+from ontology_audit_hub.infra.settings import AuditHubSettings
 from ontology_audit_hub.knowledge_service import KnowledgeUploadError, KnowledgeUploadService
 from ontology_audit_hub.qa_service import QuestionAnswerError, QuestionAnswerService
 from ontology_audit_hub.service import HumanInterruptPayload, SupervisorService
@@ -519,14 +519,14 @@ def create_app(
                     props = props or {}
                     # Priority based type detection
                     node_type = "entity"
-                    raw_labels_lower = [l.lower() for l in labels]
-                    if any("concept" in l for l in raw_labels_lower) or props.get("is_concept"):
+                    raw_labels_lower = [label.lower() for label in labels]
+                    if any("concept" in label for label in raw_labels_lower) or props.get("is_concept"):
                         node_type = "concept"
-                    elif any("category" in l for l in raw_labels_lower):
+                    elif any("category" in label for label in raw_labels_lower):
                         node_type = "category"
-                    elif any("attribute" in l for l in raw_labels_lower):
+                    elif any("attribute" in label for label in raw_labels_lower):
                         node_type = "attribute"
-                    elif any("constraint" in l for l in raw_labels_lower):
+                    elif any("constraint" in label for label in raw_labels_lower):
                         node_type = "constraint"
                     elif labels:
                         node_type = labels[0].lower()

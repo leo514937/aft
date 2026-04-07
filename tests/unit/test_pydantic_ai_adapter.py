@@ -9,7 +9,7 @@ from ontology_audit_hub.infra.llm.pydantic_ai_adapter import PydanticAILLMAdapte
 
 
 class FakeAgent:
-    instances: list["FakeAgent"] = []
+    instances: list[FakeAgent] = []
 
     def __init__(self, model_name, *, output_type, system_prompt):
         self.model_name = model_name

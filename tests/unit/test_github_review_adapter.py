@@ -4,7 +4,14 @@ import json
 import sys
 import types
 
-from ontology_audit_hub.infra.llm.github_review_agents import GitHubReviewFile, GitHubReviewIssue, GitHubReviewIssueBatch, GitHubReviewPacket, GitHubReviewReport, GitHubReviewScopePlan
+from ontology_audit_hub.infra.llm.github_review_agents import (
+    GitHubReviewFile,
+    GitHubReviewIssue,
+    GitHubReviewIssueBatch,
+    GitHubReviewPacket,
+    GitHubReviewReport,
+    GitHubReviewScopePlan,
+)
 from ontology_audit_hub.infra.llm.pydantic_ai_adapter import PydanticAILLMAdapter
 
 

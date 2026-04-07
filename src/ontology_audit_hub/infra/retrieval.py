@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import uuid
-from pathlib import Path as SysPath
 from pathlib import Path
+from pathlib import Path as SysPath
 from typing import Any, Protocol
 
 from qdrant_client import QdrantClient

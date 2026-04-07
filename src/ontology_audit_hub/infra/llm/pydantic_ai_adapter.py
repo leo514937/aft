@@ -18,7 +18,6 @@ from ontology_audit_hub.domain.audit.models import (
 )
 from ontology_audit_hub.domain.documents.models import DocumentChunk, DocumentClaim
 from ontology_audit_hub.domain.ontology.models import OntologyModel
-from ontology_audit_hub.infra.settings import AuditHubSettings
 from ontology_audit_hub.infra.llm.github_review_agents import (
     GitHubReviewIssue,
     GitHubReviewIssueBatch,
@@ -33,6 +32,7 @@ from ontology_audit_hub.infra.llm.github_review_agents import (
     build_security_system_prompt,
     build_test_coverage_system_prompt,
 )
+from ontology_audit_hub.infra.settings import AuditHubSettings
 
 
 class _IntentClassification(BaseModel):

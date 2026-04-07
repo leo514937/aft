@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import re
 from collections import Counter
 from collections.abc import Iterable
-import re
 
 from ontology_audit_hub.domain.review.models import (
     GitHubReviewIssue as DomainGitHubReviewIssue,
+)
+from ontology_audit_hub.domain.review.models import (
     GitHubReviewResponse,
 )
 from ontology_audit_hub.infra.github_snapshot import GitHubReviewCandidate

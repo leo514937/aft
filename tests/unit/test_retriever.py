@@ -1,10 +1,9 @@
 from pathlib import Path
 from types import SimpleNamespace
 
-from ontology_audit_hub.domain.documents.models import DocumentChunk
 from ontology_audit_hub.domain.audit.models import ChatHistoryMessage, RAGOptions, RAGReference
-from ontology_audit_hub.infra import retrieval
-from ontology_audit_hub.infra import qa_sources
+from ontology_audit_hub.domain.documents.models import DocumentChunk
+from ontology_audit_hub.infra import qa_sources, retrieval
 from ontology_audit_hub.infra.embeddings import SimpleHashEmbeddingAdapter
 from ontology_audit_hub.infra.lexical_index import LexicalSearchHit, SqliteLexicalIndex
 from ontology_audit_hub.infra.qa_sources import QdrantReferenceReader

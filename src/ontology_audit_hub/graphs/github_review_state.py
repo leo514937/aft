@@ -3,9 +3,9 @@ from __future__ import annotations
 from typing import TypedDict
 
 from ontology_audit_hub.domain.review.models import (
+    GitHubRepoTarget,
     GitHubReviewPartialReport,
     GitHubReviewProgress,
-    GitHubRepoTarget,
     GitHubReviewRequest,
     GitHubReviewResponse,
 )

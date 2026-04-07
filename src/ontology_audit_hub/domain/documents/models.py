@@ -70,7 +70,7 @@ class KnowledgeUploadConfig(BaseModel):
         return normalized
 
     @model_validator(mode="after")
-    def _resolve_chunking_strategy(self) -> "KnowledgeUploadConfig":
+    def _resolve_chunking_strategy(self) -> KnowledgeUploadConfig:
         if self.chunk_strategy is None:
             if self.chunk_size is not None or self.overlap_size is not None:
                 self.chunk_strategy = "legacy_char_window"

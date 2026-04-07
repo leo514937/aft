@@ -14,9 +14,9 @@ from ontology_audit_hub.graphs.nodes.github_review.local_merge_and_finalize impo
 )
 from ontology_audit_hub.graphs.nodes.github_review.resolve_target import make_resolve_github_target_node
 from ontology_audit_hub.graphs.nodes.github_review.risk_regression import make_risk_regression_review_node
-from ontology_audit_hub.graphs.nodes.github_review.select_focus_files import make_select_focus_files_node
 from ontology_audit_hub.graphs.nodes.github_review.scope_planner import make_scope_planner_node
 from ontology_audit_hub.graphs.nodes.github_review.security import make_security_review_node
+from ontology_audit_hub.graphs.nodes.github_review.select_focus_files import make_select_focus_files_node
 from ontology_audit_hub.graphs.nodes.github_review.test_coverage import make_test_coverage_review_node
 from ontology_audit_hub.graphs.nodes.github_review.validate_request import make_validate_request_node
 from ontology_audit_hub.infra.settings import AuditHubSettings
