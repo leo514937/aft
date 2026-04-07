@@ -1,20 +1,20 @@
 from __future__ import annotations
 
-from importlib import import_module
 import json
+from importlib import import_module
 from pathlib import Path
 from typing import Any, cast
 
 import typer
 from qdrant_client import QdrantClient
 
-yaml = cast(Any, import_module("yaml"))
-
 from ontology_audit_hub.domain.audit.models import AuditReport, AuditRequest, HumanDecision
 from ontology_audit_hub.domain.documents.models import DocumentChunk
 from ontology_audit_hub.infra.lexical_index import SqliteLexicalIndex
 from ontology_audit_hub.infra.settings import AuditHubSettings
 from ontology_audit_hub.service import HumanInterruptPayload, SupervisorService
+
+yaml = cast(Any, import_module("yaml"))
 
 app = typer.Typer(help="Ontology-driven QA audit hub CLI.")
 
