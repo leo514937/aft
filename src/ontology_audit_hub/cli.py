@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+from importlib import import_module
 import json
 from pathlib import Path
+from typing import Any, cast
 
 import typer
-import yaml
 from qdrant_client import QdrantClient
+
+yaml = cast(Any, import_module("yaml"))
 
 from ontology_audit_hub.domain.audit.models import AuditReport, AuditRequest, HumanDecision
 from ontology_audit_hub.domain.documents.models import DocumentChunk

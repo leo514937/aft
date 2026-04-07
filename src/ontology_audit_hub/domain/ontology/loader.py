@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+from importlib import import_module
 from pathlib import Path
+from typing import Any, cast
 
-import yaml
+yaml = cast(Any, import_module("yaml"))
 
 from ontology_audit_hub.domain.ontology.models import OntologyModel
 

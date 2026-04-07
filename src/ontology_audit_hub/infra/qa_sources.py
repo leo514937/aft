@@ -25,12 +25,12 @@ from ontology_audit_hub.infra.settings import AuditHubSettings
 
 logger = logging.getLogger(__name__)
 
-_neo4j: Any | None
+_neo4j_module: Any | None
 
 try:  # pragma: no cover - optional dependency path
-    import neo4j as _neo4j
+    import neo4j as _neo4j_module
 except ImportError:  # pragma: no cover - optional dependency path
-    _neo4j = None
+    _neo4j_module = None
 
 
 @dataclass(frozen=True)
@@ -466,7 +466,7 @@ class Neo4jReferenceReader:
         question: str,
         ontology_tags: list[str],
     ) -> tuple[list[QAGraphHit], list[str]]:
-        if _neo4j is None:
+        if _neo4j_module is None:
             raise RuntimeError("neo4j is not installed.")
 
         settings = self._current_settings()
@@ -487,7 +487,7 @@ class Neo4jReferenceReader:
         if not candidates:
             return [], []
 
-        driver = _neo4j.GraphDatabase.driver(
+        driver = _neo4j_module.GraphDatabase.driver(
             uri,
             auth=(username, password),
             connection_timeout=5.0,
