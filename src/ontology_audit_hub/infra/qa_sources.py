@@ -28,9 +28,11 @@ logger = logging.getLogger(__name__)
 _neo4j_module: Any | None
 
 try:  # pragma: no cover - optional dependency path
-    import neo4j as _neo4j_module
+    import neo4j as _imported_neo4j
 except ImportError:  # pragma: no cover - optional dependency path
     _neo4j_module = None
+else:  # pragma: no cover - optional dependency path
+    _neo4j_module = _imported_neo4j
 
 
 @dataclass(frozen=True)
